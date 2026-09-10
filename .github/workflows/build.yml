@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # required to create GitHub Releases
 
     steps:
       - name: Checkout repository
@@ -30,16 +32,29 @@ jobs:
             _locales/ \
             --exclude "*.DS_Store" "**/__MACOSX/*"
 
-      - name: Upload artifact
+      - name: Build .zip
+        run: |
+          zip -r "tracking-protection-toggle-${{ steps.version.outputs.version }}.zip" \
+            manifest.json \
+            background/ \
+            popup/ \
+            icons/ \
+            _locales/ \
+            --exclude "*.DS_Store" "**/__MACOSX/*"
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: tracking-protection-toggle-${{ steps.version.outputs.version }}
-          path: "*.xpi"
+          path: |
+            *.xpi
+            *.zip
           if-no-files-found: error
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
+          name: "v${{ steps.version.outputs.version }}"
           files: "*.xpi"
           generate_release_notes: true
