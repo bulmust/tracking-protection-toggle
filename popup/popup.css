@@ -1,0 +1,266 @@
+/* ─────────────────────────────────────────────────────────────
+   Tracking Protection Toggle — Popup Styles
+   Design: dark glassmorphism, Firefox orange accent
+───────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-base:        #0f1117;
+  --bg-card:        rgba(255, 255, 255, 0.05);
+  --border:         rgba(255, 255, 255, 0.10);
+
+  /* Firefox orange */
+  --orange:         #ff7139;
+  --orange-glow:    rgba(255, 113, 57, 0.35);
+  --orange-dim:     rgba(255, 113, 57, 0.10);
+
+  --red:            #e05252;
+  --red-glow:       rgba(224, 82, 82, 0.30);
+  --red-dim:        rgba(224, 82, 82, 0.10);
+
+  --text-primary:   #f0f2f5;
+  --text-secondary: #8b92a5;
+
+  --radius-lg:      16px;
+  --radius-pill:    999px;
+
+  --transition:     0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html, body {
+  width: 300px;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Container ─────────────────────────────────────────────── */
+.container {
+  padding: 20px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255,113,57,.07), transparent),
+    var(--bg-base);
+  min-height: 180px;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px rgba(255,113,57,0.5));
+  transition: filter var(--transition);
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* ── Toggle section ─────────────────────────────────────────── */
+.toggle-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Enabled state — Firefox orange glow */
+.toggle-section.is-enabled {
+  background: var(--orange-dim);
+  border-color: rgba(255, 113, 57, 0.28);
+  box-shadow: 0 0 26px var(--orange-glow);
+}
+
+/* Disabled state — red tint */
+.toggle-section.is-disabled {
+  background: var(--red-dim);
+  border-color: rgba(224, 82, 82, 0.25);
+  box-shadow: 0 0 20px var(--red-glow);
+}
+
+/* ── Status label ───────────────────────────────────────────── */
+.status-label {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+  color: var(--text-secondary);
+}
+
+.is-enabled  .status-label { color: var(--orange); }
+.is-disabled .status-label { color: var(--red); }
+
+/* ── Toggle button ──────────────────────────────────────────── */
+.toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toggle-btn:focus-visible .toggle-track {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.toggle-track {
+  display: flex;
+  align-items: center;
+  width: 52px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+  padding: 3px;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.is-enabled .toggle-track {
+  background: var(--orange);
+  border-color: var(--orange);
+  box-shadow: 0 0 14px var(--orange-glow);
+}
+
+.is-disabled .toggle-track {
+  background: var(--red);
+  border-color: var(--red);
+  box-shadow: 0 0 10px var(--red-glow);
+}
+
+.toggle-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  transform: translateX(0);
+  transition: transform var(--transition);
+  will-change: transform;
+}
+
+.is-enabled .toggle-thumb {
+  transform: translateX(24px);
+}
+
+/* ── Hint text ──────────────────────────────────────────────── */
+.hint {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+  padding: 0 4px;
+  transition: color 0.3s ease;
+}
+
+/* ── Restart note ───────────────────────────────────────────── */
+.restart-note {
+  font-size: 10.5px;
+  color: rgba(139, 146, 165, 0.6);
+  text-align: center;
+  line-height: 1.4;
+  padding: 0 4px;
+  font-style: italic;
+}
+
+/* ── Shared banner styles ───────────────────────────────────── */
+.info-banner,
+.warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  animation: banner-in 0.3s ease;
+}
+
+/* Info banner — shown when ETP is ON */
+.info-banner {
+  background: rgba(255, 113, 57, 0.10);
+  border: 1px solid rgba(255, 113, 57, 0.28);
+  color: rgba(255, 160, 110, 0.9);
+}
+
+/* Warning banner — shown when ETP is OFF */
+.warning {
+  background: rgba(224, 82, 82, 0.12);
+  border: 1px solid rgba(224, 82, 82, 0.30);
+  color: #f08080;
+}
+
+.banner-icon {
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.info-banner .banner-icon { color: var(--orange); }
+.warning     .banner-icon { color: var(--red); }
+
+@keyframes banner-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Spinner (loading state) ────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading .status-label::after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ── Pulse animation on state change ───────────────────────── */
+@keyframes pulse-card {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.toggle-section.animating {
+  animation: pulse-card 0.35s ease;
+}
