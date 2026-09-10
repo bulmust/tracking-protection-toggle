@@ -1,7 +1,8 @@
-
 # Tracking Protection Toggle
 
 A minimal Firefox extension to instantly enable or disable **Enhanced Tracking Protection** (`privacy.trackingprotection.enabled`) with a single click.
+
+Project website: <https://github.com/bulmust/tracking-protection-toggle>
 
 ## Why you need this
 
