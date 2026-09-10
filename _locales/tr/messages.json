@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "İzleme Koruma Değişimi",
+    "description": "Eklentinin adı"
+  },
+  "extensionDescription": {
+    "message": "Firefox'un yerleşik Gelişmiş İzleme Koruması'nı tek tıklamayla hızlıca etkinleştirin veya devre dışı bırakın.",
+    "description": "Eklentinin açıklaması"
+  }
+}

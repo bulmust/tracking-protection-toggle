@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "Tracking Protection Toggle",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Quickly enable or disable Firefox's built-in Enhanced Tracking Protection with a single click.",
+    "description": "Description of the extension"
+  }
+}

@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "Tracking Protection Toggle",
+  "name": "__MSG_extensionName__",
   "version": "1.0.0",
   "author": "Taygun Bulmus",
-  "description": "Quickly enable or disable Firefox's built-in Enhanced Tracking Protection with a single click.",
+  "description": "__MSG_extensionDescription__",
   "default_locale": "en",
   "icons": {
     "16": "icons/icon-16.png",
@@ -30,7 +30,11 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "tracking-protection-toggle@antigravity",
-      "strict_min_version": "67.0"
+      "strict_min_version": "79.0",
+      "data_collection_permissions": {
+        "required": [],
+        "optional": []
+      }
     }
   }
 }
